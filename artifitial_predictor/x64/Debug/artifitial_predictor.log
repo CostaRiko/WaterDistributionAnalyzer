@@ -1,0 +1,4 @@
+﻿  pdb.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(8,9): warning C4013: wprintf: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(30,20): warning C4018: <: несоответствие типов со знаком и без знака
+  artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Debug\artifitial_predictor.exe
