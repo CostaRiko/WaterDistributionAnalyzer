@@ -1,10 +1,12 @@
 ﻿  pdb.c
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(8,9): warning C4013: wprintf: нет определения; предполагается "extern" с возвратом типа "int"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(30,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(78,25): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "int"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(78,25): warning C4024: str_is: различные типы для формального и фактического параметров 2
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(78,35): warning C4020: str_is: слишком много фактических параметров
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(88,8): warning C4013: printf: нет определения; предполагается "extern" с возвратом типа "int"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(92,29): warning C4028: формальный параметр 2 отличается от объявления
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(93,1): warning C4029: объявленный список формальных параметров отличается от объявления
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(27,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(67,25): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "int"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(67,25): warning C4024: str_is: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(67,35): warning C4020: str_is: слишком много фактических параметров
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(77,20): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "int"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(77,20): warning C4024: str_is: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(77,31): warning C4020: str_is: слишком много фактических параметров
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(98,29): warning C4028: формальный параметр 2 отличается от объявления
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(99,1): warning C4029: объявленный список формальных параметров отличается от объявления
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(118,20): warning C4018: <: несоответствие типов со знаком и без знака
   artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Debug\artifitial_predictor.exe

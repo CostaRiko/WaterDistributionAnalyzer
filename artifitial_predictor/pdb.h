@@ -1,5 +1,7 @@
 #pragma once
 #include <Windows.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 char* reading_buffer;
 DWORD file_size;
@@ -18,8 +20,8 @@ typedef struct ATOM {
 	double z;
 } atom;
 
-atom* protein;
-atom* water;
+atom* protein; // Память не возвращена системе
+atom* water;   // Память не возвращена системе
 
 BOOL read_pdb_file(wchar_t * path);
 BOOL proceed_pdb_data(void);
@@ -29,10 +31,10 @@ BOOL prepare_memory_for_data_storage(void);
 int substring(char* str, int start, int finish, int linelen, char* result, int result_len);
 
 /*
-1) Посчитать количество атомов белка
-2) Посчитать количество атомов воды
-3) Выделить память под белок и воду
-4) Выделить память под новые координаты белка и воды
+1) Посчитать количество атомов белка										+
+2) Посчитать количество атомов воды											+
+3) Выделить память под белок и воду											+
+4) Выделить память под новые координаты белка и воды		( Обновить существующие координаты )
 5) Вычислить новые координаты белка и воды
 6) Разбить белок на альфа атомы
 7) Для каждого альфа атома выделить память под список молекул воды

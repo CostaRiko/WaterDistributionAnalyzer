@@ -1,5 +1,5 @@
 #include "pdb.h"
-
+#pragma warning( disable : 4996 )
 BOOL read_pdb_file(wchar_t* path)
 {
 	wprintf(L"PDB %s READING ...\n", path);
@@ -25,6 +25,10 @@ BOOL proceed_pdb_data()
 	int line_cursor = 0;
 	ZeroMemory(line, 128);
 	for (int i = 0; i < file_size; i++) {
+		if (i % 1000000) {
+			double percents = (double)i * 100 / file_size;
+			printf("SECOND STEP. COMPLETED... %lf\r", percents);
+		}
 		if (reading_buffer[i] == '\n') {
 			proceed_pdb_line(line, 128);
 			ZeroMemory(line, 128);
@@ -72,7 +76,24 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 	z = atof(zc);
 	name[3] = '\0';
 	res[5] = '\0';
-	printf("ID: %i %s %s %i %lf %lf %lf\r", id, name, res, resSeq, x, y, z);
+	if ( str_is(res, 6, "TIP3W\0", 6) ) {
+		water[water_cursor].id = id;
+		strcpy( water[water_cursor].name,  name);
+		strcpy( water[water_cursor].res, res);
+		water[water_cursor].resSeq = resSeq;
+		water[water_cursor].x = x;
+		water[water_cursor].y = y;
+		water[water_cursor].z = z;
+	}
+	else {
+		protein[protein_cursor].id = id;
+		strcpy(protein[protein_cursor].name, name);
+		strcpy(protein[protein_cursor].res, res);
+		protein[protein_cursor].resSeq = resSeq;
+		protein[protein_cursor].x = x;
+		protein[protein_cursor].y = y;
+		protein[protein_cursor].z = z;
+	}
 	return TRUE;
 }
 
@@ -97,6 +118,10 @@ BOOL prepare_memory_for_data_storage(void)
 	int line_cursor = 0;
 	ZeroMemory(line, 128);
 	for (int i = 0; i < file_size; i++) {
+		if (i % 1000000) {
+			double percents = (double)i * 100 / file_size;
+			printf("FIRST STEP. COMPLETED... %lf\r", percents);
+		}
 		if (reading_buffer[i] == '\n') {
 			if (
 				line[0] == 'A' &&
