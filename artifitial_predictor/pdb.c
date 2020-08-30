@@ -1,8 +1,5 @@
 #include "pdb.h"
 
-char* reading_buffer;
-DWORD file_size;
-
 BOOL read_pdb_file(wchar_t* path)
 {
 	wprintf(L"PDB %s READING ...\n", path);
@@ -91,6 +88,56 @@ BOOL str_is(char* str1, int str1len, const char* str2, int str2len)
 	else {
 		return FALSE;
 	}
+	return TRUE;
+}
+
+BOOL prepare_memory_for_data_storage(void)
+{
+	char line[128];
+	int line_cursor = 0;
+	ZeroMemory(line, 128);
+	for (int i = 0; i < file_size; i++) {
+		if (reading_buffer[i] == '\n') {
+			if (
+				line[0] == 'A' &&
+				line[1] == 'T' &&
+				line[2] == 'O' &&
+				line[3] == 'M'
+				) {
+				atoms_count++;
+				if (
+					line[17] == 'T' &&
+					line[18] == 'I' &&
+					line[19] == 'P' &&
+					line[20] == '3' &&
+					line[21] == 'W'
+					) {
+					water_size++;
+				}
+				else {
+					if ( ! ter_is_achieved ) {
+						protein_size++;
+					}
+				}
+			}
+			if (
+				line[0] == 'E' &&
+				line[1] == 'N' &&
+				line[2] == 'D' 
+				) {
+				ter_is_achieved = TRUE;
+			}
+			ZeroMemory(line, 128);
+			line_cursor = 0;
+		}
+		else {
+			line[line_cursor] = reading_buffer[i];
+			line_cursor++;
+		}
+	}
+	protein = malloc(sizeof(atom) * protein_size);
+	water = malloc(sizeof(atom) * water_size);
+
 	return TRUE;
 }
 

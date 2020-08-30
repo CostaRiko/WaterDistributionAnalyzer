@@ -18,6 +18,7 @@ int wmain(int argc, wchar_t * argv[]) {
 		wprintf(L"COMMAND LINE ARGUMENTS: %ws %ws\n", argv[1], argv[2]);
 	}
 	wchar_t* link_on_path_argument = argv[1];
+	prepare_memory_for_data_storage();
 	read_pdb_file(link_on_path_argument);
 	proceed_pdb_data();
 }
