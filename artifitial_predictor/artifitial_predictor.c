@@ -4,7 +4,8 @@
 #include <math.h>
 #include <string.h>
 #include <sys/stat.h>
-
+#include "protein_based_calculations.h"
+/*
 #pragma warning( disable : 4996 )
 
 #define X 0
@@ -43,17 +44,12 @@ struct ca_line {
 	double HOHs[900];
 } line;
 
-/*
-	Текущие задачи:
-	1) Преобразовать функцию combine для работы со структурами atom
-	2) Преобразовать функцию combine для работы со структурами atom
-*/
 void show_point_coords(double* a, char* comment)
 {
 	printf("Coordinates of %s\t: ( %lf, %lf, %lf )\n", comment, a[0], a[1], a[2]);
 }
 
-double determinant(double* a) // a = [ a11, a12, a21, a22 ]
+double determinant(double* a) 
 {
 
 	double res = a[0] * a[3] - a[2] * a[1];
@@ -81,23 +77,23 @@ double cos_a(double* plane_coefs, double* direction_vector)
 
 void rotation_x(double* p, double sina, double cosa, double* res)
 {
-	/*x*/ res[0] = p[0];
-	/*y*/ res[1] = p[1] * cosa - p[2] * sina;
-	/*z*/ res[2] = p[1] * sina + p[2] * cosa;
+	 res[0] = p[0];
+	 res[1] = p[1] * cosa - p[2] * sina;
+	 res[2] = p[1] * sina + p[2] * cosa;
 }
 
 void rotation_y(double* p, double sina, double cosa, double* res)
 {
-	/*x*/ res[0] = p[0] * cosa + p[2] * sina;
-	/*y*/ res[1] = p[1];
-	/*z*/ res[2] = (-1) * p[0] * sina + p[2] * cosa;
+	 res[0] = p[0] * cosa + p[2] * sina;
+	 res[1] = p[1];
+	 res[2] = (-1) * p[0] * sina + p[2] * cosa;
 }
 
 void rotation_z(double* p, double sina, double cosa, double* res)
 {
-	/*x*/ res[0] = p[0] * cosa - p[1] * sina;
-	/*y*/ res[1] = p[0] * sina + p[1] * cosa;
-	/*z*/ res[2] = p[2];
+	 res[0] = p[0] * cosa - p[1] * sina;
+	 res[1] = p[0] * sina + p[1] * cosa;
+	 res[2] = p[2];
 }
 
 void combine(double* CA, double* CB, double* C)
@@ -692,7 +688,7 @@ strtok1(char* s, const char* delim)
 	return strtok_r(s, delim, &olds);
 }
 
-/*int main(int args, char * argv[])
+int main(int args, char * argv[])
 {
 	if (args == 1) {
 		printf("stat_analyzer <path to start file>\n\Start file is text file which contains paths to pdb descriped time moments of system\n");

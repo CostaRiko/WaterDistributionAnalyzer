@@ -1,5 +1,12 @@
 #include "pdb.h"
-#pragma warning( disable : 4996 )
+
+char* reading_buffer;
+DWORD file_size;
+int atoms_count = 0, atoms_cursor = 0;
+int water_size = 0, water_cursor = 0;
+int protein_size = 0, protein_cursor = 0;
+BOOL ter_is_achieved = FALSE;
+
 BOOL read_pdb_file(wchar_t* path)
 {
 	wprintf(L"PDB %s READING ...\n", path);

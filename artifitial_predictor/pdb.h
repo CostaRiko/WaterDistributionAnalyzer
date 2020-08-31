@@ -1,14 +1,10 @@
-#pragma once
+#ifndef PDB
+#define PDB 1
 #include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-char* reading_buffer;
-DWORD file_size;
-int atoms_count = 0, atoms_cursor = 0;
-int water_size = 0, water_cursor = 0;
-int protein_size = 0, protein_cursor = 0;
-BOOL ter_is_achieved = FALSE;
+#pragma warning( disable : 4996 )
 
 typedef struct ATOM {
 	int id;
@@ -30,6 +26,8 @@ BOOL str_is(char* str1, const char* str2);
 BOOL prepare_memory_for_data_storage(void);
 int substring(char* str, int start, int finish, int linelen, char* result, int result_len);
 
+
+#endif
 /*
 1) Посчитать количество атомов белка										+
 2) Посчитать количество атомов воды											+
