@@ -1,13 +1,37 @@
 #ifndef PROTEIN_BASED
 #define PROTEIN_BASED 1
 #include <math.h>
+#include <Windows.h>
 
-void rotation_x(double* v, double cosa, double sina);
-void rotation_y(double* v, double cosa, double sina);
-void rotation_z(double* v, double cosa, double sina);
-void shift( double * shift, double * vector);
-double distance(double * a, double * b);
-double cos_a(double * a, double * b);
-double get_matrix_dimensions(double* m1, int * x, int * y);
+typedef struct {
+	double x;
+	double y; 
+	double z;
+} vector;
+
+typedef struct {
+	double sina;
+	double cosa;
+} step;
+
+void rotation_x(vector* v, double cosa, double sina);
+void rotation_y(vector* v, double cosa, double sina);
+void rotation_z(vector* v, double cosa, double sina);
+void shift( vector * shift, vector * vector);
+double distance(vector a, vector b);
+double cos_a(vector * a, vector * b);
+/*
+	return 
+*/
+int calculate_water_orientational_distribution(
+	vector CA, 
+	vector CB, 
+	vector N, 
+	vector* HOHa, 
+	int HOHa_len, 
+	double dist
+);
+double sin_from_cos(double cosa);
+void print_vector(vector* a);
 
 #endif

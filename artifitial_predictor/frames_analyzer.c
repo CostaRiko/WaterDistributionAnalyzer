@@ -1,5 +1,3 @@
-#include <Windows.h>
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,26 +17,19 @@ int wmain(int argc, wchar_t * argv[]) {
 		wprintf(L"COMMAND LINE ARGUMENTS: %ws %ws\n", argv[1], argv[2]);
 	}
 	wchar_t* link_on_path_argument = argv[1];
-	double m1[3][3] = {
-		{1, 2, 3},
-		{2, 3, 4},
-		{3, 4, 5}
-	}; 
 	
-	double m2[3][3] = {
-		{4, 5, 6},
-		{5, 6, 7},
-		{6, 7, 8}
-	};
-
-	double a[3] = { 1, 1, 1 };
-	double b[3] = { 2, 2, 2 };
-	printf("DISTANCE: %lf\n", distance(a, b));
+	vector a;
+	a.x = 1.0;
+	a.y = 2.0;
+	a.z = 3.0;
+	print_vector(&a);
+	shift(&a, &a);
+	print_vector(&a);
 	//get_matrix_dimensions(&m2, &x, &y);
 	//printf("Dimensions: x = %i y = %i\n", x, y);
 
-	//read_pdb_file(link_on_path_argument);
-	//prepare_memory_for_data_storage();
-	//proceed_pdb_data();
+	read_pdb_file(link_on_path_argument);
+	prepare_memory_for_data_storage();
+	proceed_pdb_data();
 }
 

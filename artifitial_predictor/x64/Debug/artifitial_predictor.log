@@ -1,4 +1,5 @@
-﻿  artifitial_predictor.c
-  protein_based_calculations.c
-  Создание кода...
+﻿  frames_analyzer.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(10,28): warning C4133: функция: несовместимые типы - из "unsigned short [16]" в "const char *const "
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(26,10): warning C4133: функция: несовместимые типы - из "vector *" в "double *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(26,14): warning C4133: функция: несовместимые типы - из "vector *" в "double *"
   artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Debug\artifitial_predictor.exe
