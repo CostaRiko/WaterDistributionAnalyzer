@@ -18,13 +18,14 @@ int wmain(int argc, wchar_t * argv[]) {
 	}
 	wchar_t* link_on_path_argument = argv[1];
 	
-	vector a;
-	a.x = 1.0;
-	a.y = 2.0;
-	a.z = 3.0;
+	/*vector a = { 1, 1, 1 };
+	vector b = { 2, 2, 3 };
+	vector c = { 2, 3, 3 };
+
 	print_vector(&a);
-	shift(&a, &a);
-	print_vector(&a);
+	print_vector(&b);
+	print_vector(&c);
+	calculate_water_orientational_distribution(a, b, c, NULL, 0, 0);*/
 	//get_matrix_dimensions(&m2, &x, &y);
 	//printf("Dimensions: x = %i y = %i\n", x, y);
 

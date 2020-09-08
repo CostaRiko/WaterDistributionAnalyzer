@@ -16,20 +16,29 @@ return:
 
 void rotation_x(vector* v, double cosa, double sina)
 {
-    v->y = v->y * cosa - v->z * sina;
-    v->z = v->y * sina + v->z * cosa;
+    double vy = v->y * cosa - v->z * sina;
+    double vz = v->y * sina + v->z * cosa;
+    v->y = check_if_null(vy);
+    v->z = check_if_null(vz);
 }
 
 void rotation_y(vector* v, double cosa, double sina)
 {
-    /*x*/ v->x = v->x * cosa + v->z * sina;
-    /*z*/ v->z = (-1) * v->x * sina + v->z * cosa;
+    /*x*/ double vx = v->x * cosa + v->z * sina;
+    /*z*/ double vz = (-1) * v->x * sina + v->z * cosa;
+    v->x = check_if_null(vx);
+    v->z = check_if_null(vz);
+    
+
 }
 
 void rotation_z(vector* v, double cosa, double sina)
 {
-    /*x*/ v->x = v->x * cosa - v->y * sina;
-    /*y*/ v->y = v->x * sina + v->y * cosa;
+    /*x*/ double vx = v->x * cosa - v->y * sina;
+    /*y*/ double vy = v->x * sina + v->y * cosa;
+    v->x = check_if_null(vx);
+    v->y = check_if_null(vy);
+
 }
 
 void shift(vector* shift, vector* v)
@@ -44,11 +53,25 @@ double distance(vector a, vector b)
     return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
 }
 
+double check_if_null(double val)
+{
+    if (val <= 10 * pow(10, -10)) {
+        return 0;
+    }
+    else {
+        return val;
+    }
+}
+
 double cos_a(vector* v1, vector* v2)
 {
     double divident = (v1->x * v2->x) + (v1->y * v2->y) + (v1->z * v2->z);
-    double divider = (pow(v1->x, 2) + pow(v1->y, 2) + pow(v1->z, 2)) * ( pow(v2->x, 2) + pow(v2->y, 2) + pow(v2->z, 2) );
-    return  divident / divider;
+    if (divident < 0) {
+        divident = divident * -1;
+    }
+    double divider = ( sqrt(pow(v1->x, 2) + pow(v1->y, 2) + pow(v1->z, 2))) * sqrt( ( pow(v2->x, 2) + pow(v2->y, 2) + pow(v2->z, 2) ));
+    double result = divident / divider;
+    return  check_if_null(result);
 }
 
 int calculate_water_orientational_distribution(vector CA, vector CB, vector N, vector* HOHa, int HOHa_len, double dist)
@@ -70,6 +93,7 @@ int calculate_water_orientational_distribution(vector CA, vector CB, vector N, v
 
     vector cb_oxy_proj = { CB.x, CB.y, 0 };
     step steps[3];
+    ZeroMemory(steps, sizeof(step) * 3);
 
     double cosa, sina;
 
@@ -77,7 +101,7 @@ int calculate_water_orientational_distribution(vector CA, vector CB, vector N, v
 
     cosa = cos_a(&cb_oxy_proj, &x_direction);
     sina = sin_from_cos(cosa);
-    if (cb_oxy_proj.y < 0) {
+    if (cb_oxy_proj.y > 0) {
         sina = -sina;
     }
 
@@ -89,7 +113,7 @@ int calculate_water_orientational_distribution(vector CA, vector CB, vector N, v
     // cosa CB` - X
     cosa = cos_a(&CB, &x_direction);
     sina = sin_from_cos(cosa);
-    if (CB.z > 0) {
+    if (CB.z < 0) {
         sina = -sina;
     }
 
@@ -100,9 +124,9 @@ int calculate_water_orientational_distribution(vector CA, vector CB, vector N, v
     
     // cosa N`` - X
     vector n_yoz_proj = { 0, N.y, N.z };
-    cosa = cos_a(&N, &n_yoz_proj);
+    cosa = cos_a(&n_yoz_proj, &y_direction);
     sina = sin_from_cos(cosa);
-    if (N.z < 0) {
+    if (N.z > 0) {
         sina = -sina;
     }
 
@@ -129,7 +153,8 @@ int calculate_water_orientational_distribution(vector CA, vector CB, vector N, v
 
 double sin_from_cos(double cosa)
 {
-    return sqrt(1 - pow(cosa, 2));
+    double res = sqrt(1 - pow(cosa, 2));
+    return check_if_null(res);
 }
 
 void print_vector(vector* a) 

@@ -14,11 +14,16 @@ typedef struct {
 	double cosa;
 } step;
 
+int atoms_count, atoms_cursor;
+int water_size, water_cursor;
+int protein_size, protein_cursor;
+
 void rotation_x(vector* v, double cosa, double sina);
 void rotation_y(vector* v, double cosa, double sina);
 void rotation_z(vector* v, double cosa, double sina);
 void shift( vector * shift, vector * vector);
 double distance(vector a, vector b);
+double check_if_null(double val);
 double cos_a(vector * a, vector * b);
 /*
 	return 

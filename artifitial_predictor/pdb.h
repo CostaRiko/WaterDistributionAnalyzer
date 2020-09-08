@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "protein_based_calculations.h"
 
 #pragma warning( disable : 4996 )
 
@@ -11,9 +12,7 @@ typedef struct ATOM {
 	char name[4];
 	char res[6];
 	int resSeq;
-	double x;
-	double y;
-	double z;
+	vector c;
 } atom;
 
 atom* protein; // Память не возвращена системе

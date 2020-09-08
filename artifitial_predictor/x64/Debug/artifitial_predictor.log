@@ -1,5 +1,18 @@
-﻿  frames_analyzer.c
+﻿  artifitial_predictor.c
+  frames_analyzer.c
 C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(10,28): warning C4133: функция: несовместимые типы - из "unsigned short [16]" в "const char *const "
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(26,10): warning C4133: функция: несовместимые типы - из "vector *" в "double *"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(26,14): warning C4133: функция: несовместимые типы - из "vector *" в "double *"
+  pdb.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(34,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(76,25): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "int"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(76,25): warning C4024: str_is: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(76,35): warning C4020: str_is: слишком много фактических параметров
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(86,20): warning C4047: функция: "const char *" отличается по уровням косвенного обращения от "int"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(86,20): warning C4024: str_is: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(86,31): warning C4020: str_is: слишком много фактических параметров
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(107,29): warning C4028: формальный параметр 2 отличается от объявления
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(108,1): warning C4029: объявленный список формальных параметров отличается от объявления
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(127,20): warning C4018: <: несоответствие типов со знаком и без знака
+  protein_based_calculations.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(162,11): warning C4013: printf: нет определения; предполагается "extern" с возвратом типа "int"
+  Создание кода...
   artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Debug\artifitial_predictor.exe

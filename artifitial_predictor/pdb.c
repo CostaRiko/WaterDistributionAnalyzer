@@ -2,9 +2,9 @@
 
 char* reading_buffer;
 DWORD file_size;
-int atoms_count = 0, atoms_cursor = 0;
-int water_size = 0, water_cursor = 0;
-int protein_size = 0, protein_cursor = 0;
+atoms_count = 0, atoms_cursor = 0;
+water_size = 0, water_cursor = 0;
+protein_size = 0, protein_cursor = 0;
 BOOL ter_is_achieved = FALSE;
 
 BOOL read_pdb_file(wchar_t* path)
@@ -88,18 +88,18 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 		strcpy( water[water_cursor].name,  name);
 		strcpy( water[water_cursor].res, res);
 		water[water_cursor].resSeq = resSeq;
-		water[water_cursor].x = x;
-		water[water_cursor].y = y;
-		water[water_cursor].z = z;
+		water[water_cursor].c.x = x;
+		water[water_cursor].c.y = y;
+		water[water_cursor].c.z = z;
 	}
 	else {
 		protein[protein_cursor].id = id;
 		strcpy(protein[protein_cursor].name, name);
 		strcpy(protein[protein_cursor].res, res);
 		protein[protein_cursor].resSeq = resSeq;
-		protein[protein_cursor].x = x;
-		protein[protein_cursor].y = y;
-		protein[protein_cursor].z = z;
+		protein[protein_cursor].c.x = x;
+		protein[protein_cursor].c.y = y;
+		protein[protein_cursor].c.z = z;
 	}
 	return TRUE;
 }
