@@ -83,7 +83,7 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 	z = atof(zc);
 	name[3] = '\0';
 	res[5] = '\0';
-	if ( str_is(res, 6, "TIP3W\0", 6) ) {
+	if ( strcmp(res, "TIP3") != -1 ) {
 		water[water_cursor].id = id;
 		strcpy( water[water_cursor].name,  name);
 		strcpy( water[water_cursor].res, res);
@@ -91,6 +91,7 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 		water[water_cursor].c.x = x;
 		water[water_cursor].c.y = y;
 		water[water_cursor].c.z = z;
+		water_cursor++;
 	}
 	else {
 		protein[protein_cursor].id = id;
@@ -100,6 +101,7 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 		protein[protein_cursor].c.x = x;
 		protein[protein_cursor].c.y = y;
 		protein[protein_cursor].c.z = z;
+		protein_cursor++;
 	}
 	return TRUE;
 }
@@ -167,8 +169,11 @@ BOOL prepare_memory_for_data_storage(void)
 			line_cursor++;
 		}
 	}
+
 	protein = malloc(sizeof(atom) * protein_size);
+	ZeroMemory(protein, sizeof(atom) * protein_size);
 	water = malloc(sizeof(atom) * water_size);
+	ZeroMemory(water, sizeof(water) * water_size);
 
 	return TRUE;
 }
