@@ -13,7 +13,7 @@
 #define DISTANCE 5
 
 int wmain(int argc, wchar_t * argv[]) {
-	printf(L"CMD LENGTH: %i\n", argc);
+	wprintf(L"CMD LENGTH: %i\n", argc);
 	if (argc < 2) {
 		wprintf(L"FIRST_ARGUMENT: %ws", argv[0]);
 		wprintf(TUTORIAL);
@@ -23,6 +23,7 @@ int wmain(int argc, wchar_t * argv[]) {
 		wprintf(L"COMMAND LINE ARGUMENTS: %ws %ws\n", argv[1], argv[2]);
 	}
 	wchar_t* link_on_path_argument = argv[1];
+	int res = 0;
 	
 	/*vector a = { 1, 1, 1 };
 	vector b = { -2, -2, -3 };
@@ -49,7 +50,13 @@ int wmain(int argc, wchar_t * argv[]) {
 	prepare_memory_for_data_storage();
 	proceed_pdb_data();
 
-	atom * calculation_sequence = malloc(sizeof(atom) * 3);
+	/*
+		Требуется отладка функции prepare_memory_for_data_storage
+		Неверно вычисляется размер массива данных о белке
+		Возможно неверно вычисляются вообще все размеры массивов
+	*/
+	HANDLE hep = GetProcessHeap();
+	atom* calculation_sequence = (atom*)HeapAlloc(hep, HEAP_ZERO_MEMORY, sizeof(atom) * 3);
 	ZeroMemory(calculation_sequence, sizeof(calculation_sequence) * 3);
 	calculation_sequence[0].id = -1;
 	calculation_sequence[1].id = -1;
@@ -59,13 +66,13 @@ int wmain(int argc, wchar_t * argv[]) {
 	
 	for (int i = 0; i < protein_size; i++) {
 		int test = strcmp("CA ", protein[i].name);
-		if ( ! strcmp("CA ", protein[i].name) ) {
+		if ( strcmp("CA ", protein[i].name) != -1 ) {
 			calculation_sequence[CA] = protein[i];
 		}
-		else if ( ! strcmp("CB ", protein[i].name) ) {
+		else if ( strcmp("CB ", protein[i].name) != -1 ) {
 			calculation_sequence[CB] = protein[i];
 		}
-		else if ( ! strcmp("N  ", protein[i].name) ) {
+		else if ( strcmp("N  ", protein[i].name) != -1 ) {
 			calculation_sequence[N] = protein[i];
 		}
 		if (
@@ -82,7 +89,7 @@ int wmain(int argc, wchar_t * argv[]) {
 				DISTANCE
 			);
 			if (calculation_result == -1) {
-				printf("CALCULATION ERROR. PROCEDURE INTERRUPTION");
+				wprintf(L"CALCULATION ERROR. PROCEDURE INTERRUPTION");
 				break;
 			}
 			ZeroMemory(calculation_sequence, sizeof(calculation_sequence) * 3);
@@ -92,8 +99,7 @@ int wmain(int argc, wchar_t * argv[]) {
 		}
 	}
 
-	free(protein);
-	free(water);
-	free(calculation_sequence);
+	free_pdb_memory_stack();
+	HeapFree(hep, NULL, calculation_sequence);
 }
 

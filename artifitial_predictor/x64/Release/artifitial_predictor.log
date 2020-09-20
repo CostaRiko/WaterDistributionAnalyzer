@@ -1,0 +1,13 @@
+﻿  pdb.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(50,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(50,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(177,21): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(177,21): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(178,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(178,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+  Создание кода
+  2 of 24 functions ( 8.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Release\artifitial_predictor.exe

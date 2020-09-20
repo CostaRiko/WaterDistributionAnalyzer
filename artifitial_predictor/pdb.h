@@ -25,7 +25,7 @@ atom* protein; // Память не возвращена системе
 atom* water;   // Память не возвращена системе
 
 BOOL read_pdb_file(wchar_t * path);
-BOOL proceed_pdb_data(void);
+void proceed_pdb_data(void);
 BOOL proceed_pdb_line(char* line, const int linelen);
 BOOL str_is(char* str1, int str1len, const char* str2, int str2len);
 BOOL prepare_memory_for_data_storage(void);
@@ -34,6 +34,7 @@ void rotation_x(vector* v, double cosa, double sina);
 void rotation_y(vector* v, double cosa, double sina);
 void rotation_z(vector* v, double cosa, double sina);
 void shift(vector* shift, vector* vector);
+void free_pdb_memory_stack();
 double distance(vector* a, vector* b);
 double check_if_null(double val);
 double cos_a(vector* a, vector* b);

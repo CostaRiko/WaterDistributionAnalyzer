@@ -1,11 +1,12 @@
 #include "pdb.h"
 
-char* reading_buffer;
+char* reading_buffer = NULL;
 DWORD file_size;
 atoms_count = 0, atoms_cursor = 0;
 water_size = 0, water_cursor = 0;
 protein_size = 0, protein_cursor = 0;
 BOOL ter_is_achieved = FALSE;
+HANDLE hHeap, hprot, hwat;
 
 BOOL read_pdb_file(wchar_t* path)
 {
@@ -17,8 +18,8 @@ BOOL read_pdb_file(wchar_t* path)
 	}
 	DWORD readed_bytes = 1;
 	file_size = GetFileSize(file, &file_size); file_size++;
-	reading_buffer = malloc(file_size);
-	ZeroMemory(reading_buffer, file_size);
+	hHeap = GetProcessHeap();
+	reading_buffer = (char*)HeapAlloc(hHeap, HEAP_ZERO_MEMORY, file_size);
 	BOOL reading_statement = ReadFile(file, reading_buffer, file_size, &readed_bytes, NULL);
 	if (!reading_statement) {
 		wprintf(L"PDB READING ERROR\n");
@@ -26,16 +27,17 @@ BOOL read_pdb_file(wchar_t* path)
 	}
 	return TRUE;
 }
-BOOL proceed_pdb_data()
+
+char line[128];
+
+void proceed_pdb_data()
 {
-	char line[128];
 	int line_cursor = 0;
 	ZeroMemory(line, 128);
-	for (int i = 0; i < file_size; i++) {
-		if (i % 1000000) {
-			double percents = (double)i * 100 / file_size;
-			printf("SECOND STEP. COMPLETED... %lf\r", percents);
-		}
+	double percents = 0;
+	for (unsigned int i = 0; i < file_size; i++) {
+		percents = (double)i * 100/ file_size;
+		printf("\tproceed_pdb_data: %lf\r", percents);
 		if (reading_buffer[i] == '\n') {
 			proceed_pdb_line(line, 128);
 			ZeroMemory(line, 128);
@@ -46,8 +48,9 @@ BOOL proceed_pdb_data()
 			line_cursor++;
 		}
 	}
-	free(reading_buffer);
-	return TRUE;
+	printf("\r                                                                              \r");
+	ZeroMemory(reading_buffer, file_size);
+	HeapFree(hHeap, NULL, reading_buffer);
 }
 
 BOOL proceed_pdb_line(char* line, const int linelen)
@@ -126,26 +129,15 @@ BOOL prepare_memory_for_data_storage(void)
 	char line[128];
 	int line_cursor = 0;
 	ZeroMemory(line, 128);
-	for (int i = 0; i < file_size; i++) {
-		if (i % 1000000) {
-			double percents = (double)i * 100 / file_size;
-			printf("FIRST STEP. COMPLETED... %lf\r", percents);
-		}
+	ter_is_achieved = FALSE;
+	double percents = 0;
+	for (unsigned int i = 0; i < file_size; i++) {
+		percents = (double)i * 100 / file_size;
+		printf("\tprepare_memory_for_data_storage: %lf\r", percents);
 		if (reading_buffer[i] == '\n') {
-			if (
-				line[0] == 'A' &&
-				line[1] == 'T' &&
-				line[2] == 'O' &&
-				line[3] == 'M'
-				) {
+			if ( strcmp(line, "ATOM  ") != -1 ) {
 				atoms_count++;
-				if (
-					line[17] == 'T' &&
-					line[18] == 'I' &&
-					line[19] == 'P' &&
-					line[20] == '3' &&
-					line[21] == 'W'
-					) {
+				if ( strcmp(line, "TIP3") != -1 ) {
 					water_size++;
 				}
 				else {
@@ -154,11 +146,7 @@ BOOL prepare_memory_for_data_storage(void)
 					}
 				}
 			}
-			if (
-				line[0] == 'E' &&
-				line[1] == 'N' &&
-				line[2] == 'D' 
-				) {
+			if (strcmp(line, "END") != -1 ) {
 				ter_is_achieved = TRUE;
 			}
 			ZeroMemory(line, 128);
@@ -169,11 +157,11 @@ BOOL prepare_memory_for_data_storage(void)
 			line_cursor++;
 		}
 	}
-
-	protein = malloc(sizeof(atom) * protein_size);
-	ZeroMemory(protein, sizeof(atom) * protein_size);
-	water = malloc(sizeof(atom) * water_size);
-	ZeroMemory(water, sizeof(water) * water_size);
+	printf("\r                                                                              \r");
+	hprot = GetProcessHeap();
+	hwat = GetProcessHeap();
+	protein = (atom*)HeapAlloc(hprot, HEAP_ZERO_MEMORY, sizeof(atom)*protein_size);
+	water = (atom*)HeapAlloc(hwat, HEAP_ZERO_MEMORY, sizeof(atom)*file_size);
 
 	return TRUE;
 }
@@ -189,6 +177,12 @@ int substring(char* str, int start, int finish, int linelen, char * result, int 
 		result_cursor++;
 	}
 	return 0;
+}
+
+void free_pdb_memory_stack()
+{
+	HeapFree(hwat, NULL, water);
+	HeapFree(hprot, NULL, protein);
 }
 
 
