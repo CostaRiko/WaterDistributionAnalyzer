@@ -47,7 +47,9 @@ int wmain(int argc, wchar_t * argv[]) {
 	return 0;*/
 
 	read_pdb_file(link_on_path_argument);
+	printf("PREPARE MEMPORY STRUCTURES\n");
 	prepare_memory_for_data_storage();
+	printf("PROCEED PDB DATA\n");
 	proceed_pdb_data();
 
 	/*
@@ -63,16 +65,18 @@ int wmain(int argc, wchar_t * argv[]) {
 	calculation_sequence[2].id = -1;
 
 	int calculation_result = 0;
+
+	printf("protein_size = %i\twater_size = %i\n", protein_size, water_size);
 	
 	for (int i = 0; i < protein_size; i++) {
 		int test = strcmp("CA ", protein[i].name);
-		if ( strcmp("CA ", protein[i].name) != -1 ) {
+		if ( strstr("CA ", protein[i].name) != 0 ) {
 			calculation_sequence[CA] = protein[i];
 		}
-		else if ( strcmp("CB ", protein[i].name) != -1 ) {
+		else if ( strstr("CB ", protein[i].name) != 0 || strstr("HA1", protein[i].name) != 0) {
 			calculation_sequence[CB] = protein[i];
 		}
-		else if ( strcmp("N  ", protein[i].name) != -1 ) {
+		else if ( strstr("N  ", protein[i].name) != 0 ) {
 			calculation_sequence[N] = protein[i];
 		}
 		if (

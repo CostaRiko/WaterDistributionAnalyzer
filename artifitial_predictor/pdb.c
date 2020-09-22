@@ -25,6 +25,7 @@ BOOL read_pdb_file(wchar_t* path)
 		wprintf(L"PDB READING ERROR\n");
 		return FALSE;
 	}
+	printf("file_size: %i\n", file_size);
 	return TRUE;
 }
 
@@ -32,12 +33,13 @@ char line[128];
 
 void proceed_pdb_data()
 {
+	ter_is_achieved = FALSE;
 	int line_cursor = 0;
 	ZeroMemory(line, 128);
 	double percents = 0;
 	for (unsigned int i = 0; i < file_size; i++) {
 		percents = (double)i * 100/ file_size;
-		printf("\tproceed_pdb_data: %lf\r", percents);
+		//printf("\tproceed_pdb_data: %lf\r", percents);
 		if (reading_buffer[i] == '\n') {
 			proceed_pdb_line(line, 128);
 			ZeroMemory(line, 128);
@@ -48,7 +50,7 @@ void proceed_pdb_data()
 			line_cursor++;
 		}
 	}
-	printf("\r                                                                              \r");
+	//printf("\r                                                                              \r");
 	ZeroMemory(reading_buffer, file_size);
 	HeapFree(hHeap, NULL, reading_buffer);
 }
@@ -66,6 +68,11 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 
 	ZeroMemory(idc, 6); ZeroMemory(name, 4); ZeroMemory(res, 6); ZeroMemory(record, 6);
 	ZeroMemory(resSeqc, 4); ZeroMemory(xc, 4); ZeroMemory(yc, 5);  ZeroMemory(zc, 6);
+
+	if (strcmp(line, "END") != -1) {
+		ter_is_achieved = TRUE;
+		return TRUE;
+	}
 
 	substring_status = substring(line, 7,  12, linelen, idc, 6);
 	substring_status = substring(line, 0, 7, linelen, record, 6);
@@ -97,14 +104,16 @@ BOOL proceed_pdb_line(char* line, const int linelen)
 		water_cursor++;
 	}
 	else {
-		protein[protein_cursor].id = id;
-		strcpy(protein[protein_cursor].name, name);
-		strcpy(protein[protein_cursor].res, res);
-		protein[protein_cursor].resSeq = resSeq;
-		protein[protein_cursor].c.x = x;
-		protein[protein_cursor].c.y = y;
-		protein[protein_cursor].c.z = z;
-		protein_cursor++;
+		if (!ter_is_achieved) {
+			protein[protein_cursor].id = id;
+			strcpy(protein[protein_cursor].name, name);
+			strcpy(protein[protein_cursor].res, res);
+			protein[protein_cursor].resSeq = resSeq;
+			protein[protein_cursor].c.x = x;
+			protein[protein_cursor].c.y = y;
+			protein[protein_cursor].c.z = z;
+			protein_cursor++;
+		}
 	}
 	return TRUE;
 }
@@ -133,11 +142,11 @@ BOOL prepare_memory_for_data_storage(void)
 	double percents = 0;
 	for (unsigned int i = 0; i < file_size; i++) {
 		percents = (double)i * 100 / file_size;
-		printf("\tprepare_memory_for_data_storage: %lf\r", percents);
+		//printf("\tprepare_memory_for_data_storage: %lf\r", percents);
 		if (reading_buffer[i] == '\n') {
-			if ( strcmp(line, "ATOM  ") != -1 ) {
+			if ( strstr(line, "ATOM  ") != 0 ) {
 				atoms_count++;
-				if ( strcmp(line, "TIP3") != -1 ) {
+				if ( strstr(line, "TIP3") != 0 ) {
 					water_size++;
 				}
 				else {
@@ -146,7 +155,7 @@ BOOL prepare_memory_for_data_storage(void)
 					}
 				}
 			}
-			if (strcmp(line, "END") != -1 ) {
+			if (strstr(line, "END") != 0 ) {
 				ter_is_achieved = TRUE;
 			}
 			ZeroMemory(line, 128);
@@ -157,11 +166,11 @@ BOOL prepare_memory_for_data_storage(void)
 			line_cursor++;
 		}
 	}
-	printf("\r                                                                              \r");
+	//printf("\r                                                                              \r");
 	hprot = GetProcessHeap();
 	hwat = GetProcessHeap();
 	protein = (atom*)HeapAlloc(hprot, HEAP_ZERO_MEMORY, sizeof(atom)*protein_size);
-	water = (atom*)HeapAlloc(hwat, HEAP_ZERO_MEMORY, sizeof(atom)*file_size);
+	water = (atom*)HeapAlloc(hwat, HEAP_ZERO_MEMORY, sizeof(atom)*water_size);
 
 	return TRUE;
 }

@@ -1,8 +1,21 @@
-﻿  pdb.c
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(53,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(53,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(184,21): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(184,21): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(185,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
-C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(185,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+﻿  artifitial_predictor.c
+  frames_analyzer.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(103,20): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\frames_analyzer.c(103,20): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+  pdb.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(54,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(54,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(192,21): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(192,21): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(193,22): warning C4047: функция: "DWORD" отличается по уровням косвенного обращения от "void *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\pdb.c(193,22): warning C4024: HeapFree: различные типы для формального и фактического параметров 2
+  protein_based_calculations.c
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(89,31): warning C4133: функция: несовместимые типы - из "atom *" в "vector *"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(203,22): warning C4047: функция: "vector *" отличается по уровням косвенного обращения от "vector **"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(203,22): warning C4024: shift: различные типы для формального и фактического параметров 1
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(204,22): warning C4047: функция: "vector *" отличается по уровням косвенного обращения от "vector **"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(204,22): warning C4024: shift: различные типы для формального и фактического параметров 1
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(205,22): warning C4047: функция: "vector *" отличается по уровням косвенного обращения от "vector **"
+C:\Users\softc\source\repos\artifitial_predictor\artifitial_predictor\protein_based_calculations.c(205,22): warning C4024: shift: различные типы для формального и фактического параметров 1
+  Создание кода...
   artifitial_predictor.vcxproj -> C:\Users\softc\source\repos\artifitial_predictor\x64\Debug\artifitial_predictor.exe

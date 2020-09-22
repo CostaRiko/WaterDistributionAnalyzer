@@ -240,7 +240,7 @@ int calculate_water_orientational_distribution(vector * CA, vector * CB, vector 
             azimut2 = atan(H2->c.y / H2->c.x);
             
 
-            //printf("zenit1 = %lf zenit2 = %lf azimut1 = %lf azimut2 = %lf\n", zenit1, zenit2, azimut1, azimut2);
+            printf("%lf\t%lf\t%lf\t%lf\n", zenit1, zenit2, azimut1, azimut2);
 
             FILE * f = fopen("log.txt", "a");
             fprintf(f, "%lf\t%lf\t%lf\t%lf\t%lf\n", zenit1, azimut1, zo, ao, ro);
